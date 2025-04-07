@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define CACHE_SIZE 1024
+#define CACHE_SIZE 2048
 // Analysis kernels
 
 __device__ int row_idx = 0;

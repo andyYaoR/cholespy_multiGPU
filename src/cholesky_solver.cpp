@@ -409,7 +409,7 @@ void CholeskySolver<Float>::launch_kernel(bool lower, CUdeviceptr x) {
 
     cuda_check(cuLaunchKernel(solve_kernel,
                             m_n, 1, 1,
-                            1024, 1, 1,
+                            2048, 1, 1,
                             0, 0, args, 0));
 }
 
@@ -417,8 +417,8 @@ template <typename Float>
 void CholeskySolver<Float>::solve_cuda(int n_rhs, CUdeviceptr b, CUdeviceptr x) {
 
     if (n_rhs != m_nrhs) {
-        if (n_rhs > 1024)
-            throw std::invalid_argument("The number of RHS should be less than 1024.");
+        if (n_rhs > 2048)
+            throw std::invalid_argument("The number of RHS should be less than 2048.");
         // We need to modify the allocated memory for the solution
         if (m_tmp_d)
             cuda_check(cuMemFree(m_tmp_d));
